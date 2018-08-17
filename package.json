@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/_mocha --require babel-polyfill --require babel-register src/test/**.spec.js --",
-    "test:watch": "./node_modules/mocha/bin/_mocha --require babel-polyfill --require babel-register src/test/**.spec.js --watch",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha src/test/**.spec.js -- --require babel-register && open coverage/lcov-report/index.html"
+    "test": "./node_modules/mocha/bin/_mocha --require babel-polyfill --require babel-register src/test/*/**.spec.js --",
+    "test:watch": "./node_modules/mocha/bin/_mocha --require babel-polyfill --require babel-register src/test/*/**.spec.js --watch",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha src/test/*/**.spec.js -- --require babel-register && open coverage/lcov-report/index.html"
   },
   "author": "",
   "license": "ISC",
