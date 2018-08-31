@@ -1,4 +1,6 @@
 import Trick from "./Trick";
+import NoOne from "./NoOne";
+import TrickBet from "./bet_scores/TrickBet";
 
 class Player {
 
@@ -24,14 +26,25 @@ class Player {
     }
 
     sings(bet, deal) {
+        bet.setSinger(this);
         deal.hasBeenSang(bet);
         return deal;
     }
 
     accepts(deal) {
+        deal.setBetSinger(new NoOne());
         return deal;
     }
     
+    refuses(deal) {
+        deal.playerRefusesBet();
+        return deal;
+    }
+
+    challenge(otherPlayer) {
+        return this;
+    }
+
     isEqual(otherPlayer){
     	return this === otherPlayer;
     }

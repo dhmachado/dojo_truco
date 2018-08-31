@@ -11,6 +11,10 @@ class NoOne {
 		return currentTrick;
 	}
 
+    challenge(otherPlayer) {
+        return otherPlayer;
+    }
+
 }
 
 export default NoOne;

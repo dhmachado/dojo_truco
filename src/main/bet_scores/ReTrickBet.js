@@ -1,15 +1,22 @@
+import TrickBet from "./TrickBet";
 import Point from '../Point';
 import NoOne from '../NoOne';
 
-class TrickBet {
+class ReTrickBet {
   
   constructor() {
     this.singer = new NoOne();
-    this.points = 2;
+    this.points = 3;
   }
 
   setSinger(singer) {
     this.singer = singer;
+  }
+
+  refused() {
+    let bet = new TrickBet();
+    bet.setSinger(this.singer);
+    return bet;
   }
 
   getPoints(lastTrickWinner) {
@@ -17,9 +24,9 @@ class TrickBet {
   }
 
   isEqual(otherBet){
-    return otherBet instanceof TrickBet;
+    return otherBet instanceof ReTrickBet;
   }
 
 }
 
-export default TrickBet;
+export default ReTrickBet;

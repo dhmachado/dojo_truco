@@ -17,6 +17,14 @@ class Deal {
         this.betSang = bet;
     }
 
+    setBetSinger(singer) {
+        this.betSang.setSinger(singer);
+    }
+
+    playerRefusesBet() {
+        this.betSang = this.betSang.refused();
+    }
+
     getPoints() {
         return this.currentTrick.getPoints(this.betSang);
     }

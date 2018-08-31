@@ -1,6 +1,5 @@
 import NoCard from './cards/NoCard';
 import NoOne from './NoOne';
-import Point from './Point';
 
 class Trick {
 
@@ -8,13 +7,13 @@ class Trick {
       this.previousCard = new NoCard();
       this.previousPlayer = new NoOne();
 		  this.winner = new NoOne();
-		  this.previousWinner = previousWinner;
+      this.previousWinner = previousWinner;
     }
     
     addCardForPlayer(card, player) {
       this.previousWinner.canPlay(player);
       this.winner = this.previousCard.challenge(this.previousPlayer, card, player);
-      
+
       this.previousCard = card;
     	this.previousPlayer = player;
     	this.previousWinner = this.winner;
@@ -23,7 +22,7 @@ class Trick {
     }
 
     getPoints(betSang) {
-        return new Point(this.previousWinner, betSang);
+      return betSang.getPoints(this.previousWinner);
     }
 
 }
