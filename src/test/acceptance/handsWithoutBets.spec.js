@@ -7,6 +7,7 @@ import Player from '../../main/Player';
 import NoBets from '../../main/bet_scores/NoBets';
 import TrickBet from "../../main/bet_scores/TrickBet";
 import ReTrickBet from "../../main/bet_scores/ReTrickBet";
+import EnvidoBet from "../../main/bet_scores/EnvidoBet";
 
 import AsOfSpades from '../../main/cards/AsOfSpades';
 import AsOfBatons from '../../main/cards/AsOfBatons';
@@ -15,6 +16,9 @@ import SevenOfBatons from '../../main/cards/SevenOfBatons';
 import FourOfCups from '../../main/cards/FourOfCups';
 import FourOfBatons from "../../main/cards/FourOfBatons";
 import ThreeOfCups from "../../main/cards/ThreeOfCups";
+import TwoOfBatons from "../../main/cards/TwoOfBatons";
+import TenOfCups from "../../main/cards/TenOfCups";
+import TwoOfCups from "../../main/cards/TwoOfCups";
 
 describe('Acceptance tests - ', () => {
 
@@ -149,6 +153,37 @@ describe('Acceptance tests - ', () => {
         console.log(deal.getPoints());
 
         expect(deal.getPoints().isEqual(new Point(mark, new TrickBet()))).to.be.true;
+    });
+
+    it("Mark pick ups the Ace of Batons, Two of Batons and Ten of Cups then"+
+    " John pick ups the Two of Cups, Three of Cups and Ace of Spades then" +
+    " Mark sings the Envido then" +
+    " John accepts then" +
+    " Mark has 23 points of Envido then" +
+    " John has 25 points of Envido then" +
+    " John wins the Envido then", () => {
+
+        let john = new Player("John");
+        let mark = new Player("Mark");
+
+        let deal = new Deal();
+
+        mark.pickup(new AsOfBatons(), new TwoOfBatons(), new TenOfCups());
+        john.pickup(new TwoOfCups(), new ThreeOfCups(), new AsOfSpades());
+
+        deal = mark.singsEnvido(deal);
+        deal = john.acceptsEnvido(deal);
+
+        deal = mark.tellsHisEnvidoPoints(deal);
+        deal = john.tellsHisEnvidoPoints(deal);
+
+        deal = mark.play(new TenOfCups(), deal);
+        deal = john.play(new TwoOfCups(), deal);
+
+        deal = john.play(new AsOfSpades(), deal);
+        deal = mark.play(new TwoOfBatons(), deal);
+
+        expect(deal.getPoints().isEqual(new Point(john, new /*EnvidoBet*/NoBets()))).to.be.true;
     });
 
 });

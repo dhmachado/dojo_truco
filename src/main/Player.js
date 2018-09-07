@@ -1,6 +1,7 @@
 import Trick from "./Trick";
 import NoOne from "./NoOne";
-import TrickBet from "./bet_scores/TrickBet";
+import EnvidoBet from "./bet_scores/EnvidoBet";
+import AsOfBatons from "./cards/AsOfBatons";
 
 class Player {
 
@@ -31,6 +32,16 @@ class Player {
         return deal;
     }
 
+    singsEnvido(deal) {
+        let bet = new EnvidoBet(this);
+        deal.envidoBetHasBeenSang(bet);
+        return deal;
+    }
+
+    acceptsEnvido(deal) {
+        return deal;
+    }
+
     accepts(deal) {
         deal.setBetSinger(new NoOne());
         return deal;
@@ -39,6 +50,38 @@ class Player {
     refuses(deal) {
         deal.playerRefusesBet();
         return deal;
+    }
+
+    tellsHisEnvidoPoints(deal) {
+        deal.playerTellsHisEnvidoPoints(this, this.envidoPoints());
+        return deal;
+    }
+
+    envidoPoints() {
+        let envidos = [];
+
+        let cartas = [this.cards[0], this.cards[1]];
+        envidos.push(cartas[0].dameEnvido(cartas[1]));
+
+        
+
+        /*let duples = [];
+        this.cards.forEach(function(element, index, array) {          
+            duples.push(
+                array.filter(function(value2, index2, arr2){
+                    return value2.name != element.name;
+                })
+            );
+        });
+
+        let envidos = [];
+        duples.forEach(function(el, i, arr) {
+            envidos.push(el[0].addEnvidoPoints(el[1]));
+        });
+
+        console.log(envidos);*/
+
+        return this.cards;
     }
 
     challenge(otherPlayer) {

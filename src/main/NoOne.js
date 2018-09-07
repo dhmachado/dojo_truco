@@ -15,6 +15,10 @@ class NoOne {
         return otherPlayer;
     }
 
+    isEqual(otherPlayer) {
+        return otherPlayer instanceof NoOne;
+    }
+
 }
 
 export default NoOne;
